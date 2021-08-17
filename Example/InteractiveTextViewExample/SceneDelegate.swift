@@ -1,8 +1,8 @@
 //
 //  SceneDelegate.swift
-//  InteractiveTextView
+//  InteractiveTextViewExample
 //
-//  Created by Grigoriy Sukhorukov on 28.06.2021.
+//  Created by Grigoriy Sukhorukov on 17.08.2021.
 //
 
 import UIKit

@@ -1,6 +1,6 @@
 import UIKit
 
-struct TextAttribute {
+public struct TextAttribute {
     let name: NSAttributedString.Key
     let value: Any
     let range: NSRange

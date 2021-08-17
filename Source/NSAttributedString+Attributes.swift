@@ -1,14 +1,7 @@
-//
-//  NSAttributedString+Attributes.swift
-//  InteractiveTextView
-//
-//  Created by Grigoriy Sukhorukov on 16.08.2021.
-//
-
 import Foundation
 
-extension NSAttributedString {
-    internal var range: NSRange {
+public extension NSAttributedString {
+    var range: NSRange {
         return NSRange(location: 0, length: length)
     }
     
