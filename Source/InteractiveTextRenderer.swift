@@ -1,10 +1,10 @@
 import UIKit
 
 public struct TextAttribute {
-    let name: NSAttributedString.Key
-    let value: Any
-    let range: NSRange
-    let lineFrames: [CGRect]
+    public let name: NSAttributedString.Key
+    public let value: Any
+    public let range: NSRange
+    public let lineFrames: [CGRect]
 }
 
 internal class InteractiveTextRenderer {
