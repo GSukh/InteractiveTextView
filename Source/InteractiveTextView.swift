@@ -26,6 +26,7 @@ public class InteractiveTextView: UIView {
             } else {
                 textRenderer.textStorage.setAttributedString(NSAttributedString())
             }
+            accessibilityLabel = attributedText?.string
             prepareAttributedString()
             setNeedsDisplay()
         }
@@ -69,6 +70,8 @@ public class InteractiveTextView: UIView {
         backgroundColor = .clear
         clipsToBounds = false
         isExclusiveTouch = true
+        isAccessibilityElement = true
+        accessibilityTraits = .staticText
         layer.contentsGravity = .bottomLeft
         longPressGestureRecognizer.addTarget(self, action: #selector(didLongPress))
         longPressGestureRecognizer.delegate = self
