@@ -56,7 +56,7 @@ open class InteractiveTextView: UIView {
     private let textRenderer = InteractiveTextRenderer()
     private let longPressGestureRecognizer = UILongPressGestureRecognizer()
     
-    override init(frame: CGRect) {
+    override public init(frame: CGRect) {
         super.init(frame: frame)
         initialConfiguration()
     }
