@@ -5,7 +5,7 @@ public protocol InteractiveTextViewDelegate: NSObjectProtocol {
     func textView(_ textView: InteractiveTextView, didLongpressOnAttribute attribute: TextAttribute)
 }
 
-public class InteractiveTextView: UIView {
+open class InteractiveTextView: UIView {
     public static let linkAttributeName: NSAttributedString.Key = NSAttributedString.Key.init("InteractiveTextLinkAttribute")
 
     public weak var delegate: InteractiveTextViewDelegate?
@@ -61,7 +61,7 @@ public class InteractiveTextView: UIView {
         initialConfiguration()
     }
 
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         super.init(coder: coder)
         initialConfiguration()
     }
