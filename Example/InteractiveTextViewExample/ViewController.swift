@@ -21,6 +21,8 @@ class ViewController: UIViewController {
         
         configureBottomTextView(bottomTextView)
         view.addSubview(bottomTextView)
+        
+        configureConstraints()
     }
     
     private func configureTopTextView(_ textView: InteractiveTextView) {
@@ -40,6 +42,7 @@ class ViewController: UIViewController {
         
         textView.linkAttributes = [.foregroundColor: UIColor.systemBlue]
         textView.highlightedLinkAttributes = [.foregroundColor: UIColor.systemBlue.withAlphaComponent(0.6)]
+        textView.isHeightConstraintEnabled = true
     }
     
     private func configureBottomTextView(_ textView: InteractiveTextView) {
@@ -68,19 +71,25 @@ class ViewController: UIViewController {
         textView.highlightBubbleColor = UIColor.blue.withAlphaComponent(0.4)
         textView.highlightBubbleInsets = UIEdgeInsets(top: 0.0, left: -2.0, bottom: -2.0, right: -2.0)
         textView.highlightBubbleRadius = 4.0
+        textView.isHeightConstraintEnabled = true
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+    private func configureConstraints() {
+        topTextView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            topTextView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            topTextView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            topTextView.rightAnchor.constraint(equalTo: view.rightAnchor)
+        ])
+        topTextView.invalidateIntrinsicContentSize()
         
-        let containerRect = view.bounds.inset(by: view.safeAreaInsets)
-        let topTextSize = topTextView.sizeThatFits(containerRect.size)
-        let topTextOrigin = CGPoint(x: containerRect.minX, y: containerRect.minY)
-        topTextView.frame = CGRect(origin: topTextOrigin, size: topTextSize)
-        
-        let bottomTextSize = bottomTextView.sizeThatFits(containerRect.size)
-        let bottomTextOrigin = CGPoint(x: containerRect.minX, y: containerRect.minY + topTextSize.height + 12)
-        bottomTextView.frame = CGRect(origin: bottomTextOrigin, size: bottomTextSize)
+        bottomTextView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            bottomTextView.topAnchor.constraint(equalTo: topTextView.bottomAnchor, constant: 24.0),
+            bottomTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            bottomTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+        bottomTextView.invalidateIntrinsicContentSize()
     }
 
 }

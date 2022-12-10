@@ -19,6 +19,14 @@ open class InteractiveTextView: UIView {
         }
     }
     
+    private var heightConstraint: NSLayoutConstraint!
+    private var lastWidth: CGFloat = 0.0
+    public var isHeightConstraintEnabled = false {
+        didSet {
+            heightConstraint.isActive = isHeightConstraintEnabled
+        }
+    }
+    
     public var attributedText: NSAttributedString? {
         didSet {
             if let attributedString = attributedText {
@@ -77,6 +85,7 @@ open class InteractiveTextView: UIView {
         longPressGestureRecognizer.delegate = self
         longPressGestureRecognizer.isEnabled = isLongpressEnabled
         addGestureRecognizer(longPressGestureRecognizer)
+        heightConstraint = heightAnchor.constraint(equalToConstant: 0)
     }
     
     private func prepareAttributedString() {
@@ -85,6 +94,16 @@ open class InteractiveTextView: UIView {
         }
         if let pressAttribute = pressAttribute {
             textRenderer.textStorage.addAttributes(highlightedLinkAttributes, range: pressAttribute.range)
+        }
+    }
+    
+    public override var bounds: CGRect {
+        didSet {
+            if isHeightConstraintEnabled && lastWidth != bounds.width {
+                lastWidth = bounds.width
+                let size = sizeThatFits(CGSize(width: bounds.width, height: .greatestFiniteMagnitude))
+                heightConstraint.constant = size.height
+            }
         }
     }
     
